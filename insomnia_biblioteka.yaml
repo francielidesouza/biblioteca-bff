@@ -1,0 +1,587 @@
+_type: export
+__export_format: 4
+__export_date: 2023-07-08T14:53:39.388Z
+__export_source: insomnia.desktop.app:v2022.7.0
+resources:
+  - _id: req_1f6ba1ef0afd4c889f42b339fecb4610
+    parentId: fld_58e49fe31e584c2e8971e3f8b797f83d
+    modified: 1688305100597
+    created: 1688304961209
+    url: "{{ _.baseURL }}loans/"
+    name: Loans
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1688304961209
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_58e49fe31e584c2e8971e3f8b797f83d
+    parentId: wrk_44a8258afa0b486780ffcc27ffc3be46
+    modified: 1688304958187
+    created: 1688304958187
+    name: Loans
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1688304958187
+    _type: request_group
+  - _id: wrk_44a8258afa0b486780ffcc27ffc3be46
+    parentId: null
+    modified: 1688140142066
+    created: 1688140142066
+    name: Project M5
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_73ca346e5aad4124ad99a5c08d4795e5
+    parentId: fld_58e49fe31e584c2e8971e3f8b797f83d
+    modified: 1688823647667
+    created: 1688823448324
+    url: "{{ _.baseURL }}loans/users/2"
+    name: Loans ID
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_0833b5d56d2f4ac981ab53a1ca26e7f3',
+        'b64::JC5hY2Nlc3M=::46b', 'never', 60 %}"
+    metaSortKey: -1688286974248.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a02d672ff9f14e6982fa6ec4296ccbf0
+    parentId: fld_58e49fe31e584c2e8971e3f8b797f83d
+    modified: 1688823849454
+    created: 1688305117642
+    url: "{{ _.baseURL }}loans/copy/3/"
+    name: Create Loan
+    description: ""
+    method: POST
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_0833b5d56d2f4ac981ab53a1ca26e7f3',
+        'b64::JC5hY2Nlc3M=::46b', 'never', 60 %}"
+    metaSortKey: -1688268987288
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e65dcea559bd41fcbad427f3705865b3
+    parentId: fld_58e49fe31e584c2e8971e3f8b797f83d
+    modified: 1688823317669
+    created: 1688823289315
+    url: "{{ _.baseURL }}loans/1/return/"
+    name: Create Loan Return
+    description: ""
+    method: PATCH
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_0833b5d56d2f4ac981ab53a1ca26e7f3',
+        'b64::JC5hY2Nlc3M=::46b', 'never', 60 %}"
+    metaSortKey: -1688251000327.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b3c1ae5531314bd79ef347a08d3275b1
+    parentId: fld_77a8cfe9e44e4289bad156efb49762c6
+    modified: 1688262825326
+    created: 1688233013367
+    url: "{{ _.baseURL }}copies/"
+    name: Copy
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1688233013367
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_77a8cfe9e44e4289bad156efb49762c6
+    parentId: wrk_44a8258afa0b486780ffcc27ffc3be46
+    modified: 1688233008423
+    created: 1688233008423
+    name: Copies
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1688233008423
+    _type: request_group
+  - _id: req_1488c2c3608c40faa5cbce94ee7841e6
+    parentId: fld_77a8cfe9e44e4289bad156efb49762c6
+    modified: 1688760052517
+    created: 1688759161065
+    url: "{{ _.baseURL }}copies/2/"
+    name: Copy ID
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"avaliable": false
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_0833b5d56d2f4ac981ab53a1ca26e7f3',
+        'b64::JC5hY2Nlc3M=::46b', 'never', 60 %}"
+    metaSortKey: -1688210737917
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a0e3d0b58285489a80bc81b41c3466c5
+    parentId: fld_77a8cfe9e44e4289bad156efb49762c6
+    modified: 1688823780425
+    created: 1688233041666
+    url: "{{ _.baseURL }}copies/"
+    name: Create Copy
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"available": true,
+        	"book": 3
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_0833b5d56d2f4ac981ab53a1ca26e7f3',
+        'b64::JC5hY2Nlc3M=::46b', 'never', 60 %}"
+    metaSortKey: -1688188462467
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a1dbfeadb3f74f4f939562c0916b0e47
+    parentId: fld_cd616bb865fa411590832c11385b1125
+    modified: 1688314521252
+    created: 1688143320049
+    url: "{{ _.baseURL }}books/"
+    name: Books
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1688143320049
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_cd616bb865fa411590832c11385b1125
+    parentId: wrk_44a8258afa0b486780ffcc27ffc3be46
+    modified: 1688144295548
+    created: 1688144295548
+    name: books
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1688144295548
+    _type: request_group
+  - _id: req_2ecc41a68e9c41f4a4d6709feb4e1e50
+    parentId: fld_cd616bb865fa411590832c11385b1125
+    modified: 1688754493297
+    created: 1688754486815
+    url: "{{ _.baseURL }}books/1/"
+    name: Book ID
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1688110713203.0625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_088578f2c504432784e17624f654c1db
+    parentId: fld_cd616bb865fa411590832c11385b1125
+    modified: 1688823721085
+    created: 1688144335801
+    url: "{{ _.baseURL }}books/"
+    name: Create Book
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"title": "A Arte da Guerra 3",
+        	"publishing_date": "2007-10-05",
+        	"author": "poltre",
+        	"pages": 520
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+      disabled: false
+    metaSortKey: -1688078106357.125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_00dd4ed59f1f49e4ad8fce7567c4bbbb
+    parentId: fld_cd616bb865fa411590832c11385b1125
+    modified: 1688308674023
+    created: 1688308650050
+    url: "{{ _.baseURL }}books/4/"
+    name: Delete Book
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1688012892665.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5ef5d455897a4a4592262c0ba37c8948
+    parentId: fld_cd616bb865fa411590832c11385b1125
+    modified: 1688756431782
+    created: 1688308735810
+    url: "{{ _.baseURL }}books/2/"
+    name: Update Book
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"pages": 200
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+      disabled: false
+    metaSortKey: -1687752037897.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_72f48c4d3b0e4955bdbcf69039c747e5
+    parentId: fld_7ec1fced9e784f5889ebbe4f183f2e21
+    modified: 1688743879450
+    created: 1688663471254
+    url: "{{ _.baseURL }}users/"
+    name: create user employee
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "Davi Portela",
+        	"email": "cleyvitonk@gmail.com",
+        	"password": "1234",
+        	"employee": true
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1688143911446.6875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_7ec1fced9e784f5889ebbe4f183f2e21
+    parentId: wrk_44a8258afa0b486780ffcc27ffc3be46
+    modified: 1688143909692
+    created: 1688143909692
+    name: User
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1688143909692
+    _type: request_group
+  - _id: req_302890155bd6469f8a88a1233d22af60
+    parentId: fld_7ec1fced9e784f5889ebbe4f183f2e21
+    modified: 1688755756459
+    created: 1688666234102
+    url: "{{ _.baseURL }}users/"
+    name: create user
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "Ana Portela",
+        	"email": "ana@mail.com",
+        	"password": "1234",
+        	"employee": false
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1688143911386.5312
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_71f82edfdcf2447ab3a789f5f4a40835
+    parentId: fld_7ec1fced9e784f5889ebbe4f183f2e21
+    modified: 1688734405200
+    created: 1688320738693
+    url: "{{ _.baseURL }}users/"
+    name: Users
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_0833b5d56d2f4ac981ab53a1ca26e7f3',
+        'b64::JC5hY2Nlc3M=::46b', 'never', 60 %}"
+    metaSortKey: -1688143911085.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_96092684a1a64f0b9f2a6f3f0cd6bb61
+    parentId: fld_7ec1fced9e784f5889ebbe4f183f2e21
+    modified: 1688756398167
+    created: 1688385461490
+    url: "{{ _.baseURL }}users/1/"
+    name: User ID
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_0833b5d56d2f4ac981ab53a1ca26e7f3',
+        'b64::JC5hY2Nlc3M=::46b', 'never', 60 %}"
+      disabled: false
+    metaSortKey: -1688143910845.125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_347273fdd76a4f32a188fe322391d3d9
+    parentId: fld_7ec1fced9e784f5889ebbe4f183f2e21
+    modified: 1688759284519
+    created: 1688316704498
+    url: "{{ _.baseURL }}users/1/books/"
+    name: Update User Book
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "following": [1,2]
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_0833b5d56d2f4ac981ab53a1ca26e7f3',
+        'b64::JC5hY2Nlc3M=::46b', 'never', 60 %}"
+      disabled: false
+    metaSortKey: -1688143910604.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_42676755c28143db95c287e70fbc3ea2
+    parentId: fld_7ec1fced9e784f5889ebbe4f183f2e21
+    modified: 1688756481974
+    created: 1688735873280
+    url: "{{ _.baseURL }}users/1/books/"
+    name: Delete User Book
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "following": [2]
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_0833b5d56d2f4ac981ab53a1ca26e7f3',
+        'b64::JC5hY2Nlc3M=::46b', 'never', 60 %}"
+    metaSortKey: -1688143910123.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0833b5d56d2f4ac981ab53a1ca26e7f3
+    parentId: wrk_44a8258afa0b486780ffcc27ffc3be46
+    modified: 1688823949522
+    created: 1688144096694
+    url: "{{ _.baseURL }}users/login/"
+    name: Login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "Davi Portela",
+        	"password": "1234"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1688143909642
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_f53035fdd59b8b50ca57a1b6c470951a7bc59379
+    parentId: wrk_44a8258afa0b486780ffcc27ffc3be46
+    modified: 1688663421783
+    created: 1688663421783
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1688663421783
+    _type: environment
+  - _id: jar_f53035fdd59b8b50ca57a1b6c470951a7bc59379
+    parentId: wrk_44a8258afa0b486780ffcc27ffc3be46
+    modified: 1688140142081
+    created: 1688140142081
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_76edbeeafb6d4fc18ccd926dc2148a04
+    parentId: wrk_44a8258afa0b486780ffcc27ffc3be46
+    modified: 1688663399944
+    created: 1688663399944
+    fileName: Project M5
+    contents: ""
+    contentType: yaml
+    _type: api_spec

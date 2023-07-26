@@ -1,0 +1,851 @@
+openapi: 3.0.3
+info:
+  title: BiblioteKA
+  version: 1.0.0
+  description: Project developed to loan books to users
+paths:
+  /api/books/:
+    get:
+      operationId: books_get
+      description: Rota para listar todos os livros sem necessidade de autenticação
+        | token e permissão de usuário, nesse sentido, qualquer pessoa poderá acessar
+        essa rota
+      summary: Listar todos os livros
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBookList'
+          description: ''
+    post:
+      operationId: book_post
+      description: Rota para registrar um livro com necessidade de autenticação |
+        token e permissão de empregado, sendo assim, o usuário deverá ser um empregado
+      summary: Registrar um livro
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Book'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+  /api/books/{id}/:
+    patch:
+      operationId: book_update_id
+      description: Rota para atualizar qualquer campo de um livro específico por ID.
+        Há necessidade de autenticação | token e permissão de empregado, nesse sentido,
+        somente o empregado poderá acessar essa rota
+      summary: Atualizar dados de um livro por ID
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - books
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBook'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBook'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBook'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+          description: ''
+    delete:
+      operationId: book_delete_id
+      description: Rota para excluir um livro específico por ID. Há necessidade de
+        autenticação | token e permissão de empregado, nesse sentido, somente o empregado
+        poderá acessar essa rota
+      summary: Excluir um livro por ID
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - books
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/copies/:
+    get:
+      operationId: copy_get
+      description: Rota para obter todos os exemplares (cópias) dos livros contendo
+        o status atual de sua disponibilidade. Para isso o usuário não precisa de
+        autenticação nem de permissão, sendo assim, qualquer pessoa pode acessar essa
+        rota
+      summary: Verificar disponibilidade de todos os livros
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - copies
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCopyList'
+          description: ''
+    post:
+      operationId: copy_post
+      description: Rota para registrar a disponibilidade de um exemplar (cópia) de
+        um livro. Para isso o usuário precisa estar autenticado como empregado
+      summary: Registrar disponibilidade de um exemplar (livro)
+      tags:
+      - copies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Copy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Copy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Copy'
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Copy'
+          description: ''
+  /api/copies/{id}/:
+    patch:
+      operationId: copy_update_id
+      description: Rota para atualizar qualquer campo de um exemplar (cópia) de um
+        livro específico por ID, contendo o status atual de sua disponibilidade. Para
+        isso o usuário  precisa de autenticação e ter permissão de empregado para
+        realizar as alterações
+      summary: Atualizar dados de copies
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - copies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCopy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCopy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCopy'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Copy'
+          description: ''
+  /api/loans/:
+    get:
+      operationId: loans_get
+      description: Rota para listar todos os livros emprestados. É necessário estar
+        autenticado | token e ter permissão de empregado, sendo assim, somente um
+        empregado poderá acessar essa rota
+      summary: Listar todos livros emprestados
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - loans
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLoanList'
+          description: ''
+  /api/loans/{id}/return/:
+    patch:
+      operationId: loan_update_id
+      description: Rota para registrar a devolução de um empréstimo,além disso, é
+        necessário passar o ID do empréstimo na rota. É necessário ter autenticação
+        | token e permissão de dono (estudante ou empregado)
+      summary: Registrar devolução de empréstimo por ID
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - loans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLoan'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedLoan'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedLoan'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Loan'
+          description: ''
+  /api/loans/copy/{id}/:
+    post:
+      operationId: loan_copy_post_id
+      description: Rota para registrar um empréstimo de um exemplar de um livro de
+        acordo com a disponilidade (avaliable) registrada na entidade copy. É preciso
+        fornecer o ID do exemplar, neste caso, de copy na rota. É necessário ter autenticação
+        de empregado ou estudante para realizar este registro
+      summary: Registrar o status de um empréstimo de um livro por ID do exemplar
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - loans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Loan'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Loan'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Loan'
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Loan'
+          description: ''
+  /api/loans/users/{id}/:
+    get:
+      operationId: loans_by_user_get_id
+      description: Rota para listar todos os empréstimos de livros realizados por
+        um usuário específico podendo ser um estudante ou um empregado. Para isso,
+        é necessário passar o ID do usuário na rota. É necessário ter autenticação
+        | token e permissão de dono (estudante ou empregado)
+      summary: Listar empréstimos de livros por ID de usuário
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - loans
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLoanList'
+          description: ''
+  /api/users/:
+    get:
+      operationId: users_get
+      description: Rota para listar usuários com necessidade de autenticação | token.
+        Esta rota é habilitada somente para empregados
+      summary: Listar todos os usuários
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserList'
+          description: ''
+    post:
+      operationId: user_post
+      description: Rota para criar um usuário sem necessidade de autenticação | token,
+        podendo ser um empregado ou estudante
+      summary: Criar usuário
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/users/{id}/:
+    get:
+      operationId: user_get_id
+      description: Rota para capturar um usuário sendo necessáio que o usuário esteja
+        autenticado | token e com permissão de acesso, sendo assim, é necessário que
+        usuário seja o dono da conta ou seja um empregado.
+      summary: Capturar usuário por ID
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: user_delete_id
+      description: Rota para excluir um usuário sendo necessário que o usuário esteja
+        autenticado | token e com permissão de acesso. Sendo assim, o usuário pode
+        ser o dono da conta ou um empregado com autorização para realizar a exclusão
+      summary: Excluir usuário por ID
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/users/{id}/books/:
+    patch:
+      operationId: user_update_books_by_id
+      description: Rota para seguir livros, sendo necessário a indicação do ID do
+        usuário na URL e no campo 'following' os ID's do livros que serão seguidos.
+        Apenas o usuário poderá acrescentar os livros que deseja seguir no seu campo
+        'following'. Para isso é necessário que o usuário esteja autenticado | token
+        e com permissão de acesso.
+      summary: Seguir livro por ID associado ao usuário
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: user_delete_books_by_id
+      description: Rota para excluir os livros que o usuário deseja deixar de seguir.  Para
+        isso é necessário que o usuário esteja autenticado | token e com permissão
+        de acesso. Sendo assim, o usuário precisa ser o dono da conta
+      summary: Excluir livro seguido por ID associado ao usuário
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/users/login/:
+    post:
+      operationId: user_login_post
+      description: Rota para logar usuários sem necessidade de autenticação | token
+      summary: Logar usuários
+      tags:
+      - login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 100
+        synopsis:
+          type: string
+          nullable: true
+        publishing_date:
+          type: string
+          format: date-time
+        author:
+          type: string
+          maxLength: 50
+        pages:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        quantity:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+      required:
+      - author
+      - id
+      - pages
+      - publishing_date
+      - title
+    Copy:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        avaliable:
+          type: boolean
+        book:
+          type: string
+          readOnly: true
+      required:
+      - book
+      - id
+    Loan:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        loan_date:
+          type: string
+          format: date
+          readOnly: true
+        return_date:
+          type: string
+          format: date
+          readOnly: true
+        status:
+          type: boolean
+          readOnly: true
+        copy:
+          allOf:
+          - $ref: '#/components/schemas/Copy'
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+      required:
+      - copy
+      - id
+      - loan_date
+      - return_date
+      - status
+      - user
+    Nested:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 100
+        synopsis:
+          type: string
+          nullable: true
+        publishing_date:
+          type: string
+          format: date-time
+        author:
+          type: string
+          maxLength: 50
+        pages:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        quantity:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+      required:
+      - author
+      - id
+      - pages
+      - publishing_date
+      - title
+    PaginatedBookList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+    PaginatedCopyList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Copy'
+    PaginatedLoanList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Loan'
+    PaginatedUserList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    PatchedBook:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 100
+        synopsis:
+          type: string
+          nullable: true
+        publishing_date:
+          type: string
+          format: date-time
+        author:
+          type: string
+          maxLength: 50
+        pages:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        quantity:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+    PatchedCopy:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        avaliable:
+          type: boolean
+        book:
+          type: string
+          readOnly: true
+    PatchedLoan:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        loan_date:
+          type: string
+          format: date
+          readOnly: true
+        return_date:
+          type: string
+          format: date
+          readOnly: true
+        status:
+          type: boolean
+          readOnly: true
+        copy:
+          allOf:
+          - $ref: '#/components/schemas/Copy'
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+    PatchedUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          maxLength: 50
+        email:
+          type: string
+          format: email
+          maxLength: 120
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        employee:
+          type: boolean
+        is_blocked:
+          type: boolean
+        block_end_date:
+          type: string
+          format: date
+          nullable: true
+        following:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - password
+      - refresh
+      - username
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          maxLength: 50
+        email:
+          type: string
+          format: email
+          maxLength: 120
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        employee:
+          type: boolean
+        is_blocked:
+          type: boolean
+        block_end_date:
+          type: string
+          format: date
+          nullable: true
+        following:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - email
+      - following
+      - id
+      - password
+      - username
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
